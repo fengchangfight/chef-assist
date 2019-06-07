@@ -17,4 +17,7 @@ VueJs框架之quasar
 ![餐桌视图](./canzhuo.png)
 
 ## 菜品管理
-![餐桌视图](./caipin.png)
+![菜品管理](./caipin.png)
+
+## 用户管理
+![用户管理](./user.png)
