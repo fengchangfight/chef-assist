@@ -1,0 +1,129 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="fengchang" id="createTable-ca-order">
+        <createTable tableName="ca_order">
+            <column name="id" type="bigint(20)" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_no" type="varchar(50)">
+            </column>
+            <column name="order_status" type="varchar(50)">
+            </column>
+            <column name="start_time" type="timestamp">
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="fengchang" id="addNotNullConstraint-order-no-ca-order">
+        <addNotNullConstraint
+                columnDataType="varchar(50)"
+                columnName="order_no"
+                tableName="ca_order"/>
+    </changeSet>
+    <changeSet author="fengchang" id="addUniqueConstraint-ca-order-no">
+        <addUniqueConstraint columnNames="order_no"
+                             constraintName="unique-order-no-in-caorder"
+                             initiallyDeferred="true"
+                             tableName="ca_order"/>
+    </changeSet>
+    <changeSet author="fengchang" id="createTable-ca-table">
+        <createTable tableName="ca_table">
+            <column name="id" type="bigint(20)" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="table_no" type="varchar(50)">
+            </column>
+            <column name="description" type="text">
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="fengchang" id="addNotNullConstraint-table-no-ca-table">
+        <addNotNullConstraint
+                columnDataType="varchar(50)"
+                columnName="table_no"
+                tableName="ca_table"/>
+    </changeSet>
+    <changeSet author="fengchang" id="addUniqueConstraint-ca-table-no">
+        <addUniqueConstraint columnNames="table_no"
+                             constraintName="unique-table-no-in-catable"
+                             initiallyDeferred="true"
+                             tableName="ca_table"/>
+    </changeSet>
+    <changeSet author="fengchang" id="createTable-ca-dish">
+        <createTable tableName="ca_dish">
+            <column name="id" type="bigint(20)" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+            </column>
+            <column name="category" type="varchar(50)">
+            </column>
+            <column name="description" type="text">
+            </column>
+            <column name="expected_cooking_time" type="int unsigned" defaultValue="10">
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="fengchang" id="addUniqueConstraint-ca-dish-name">
+        <addUniqueConstraint columnNames="name"
+                             constraintName="unique-name-in-cadish"
+                             initiallyDeferred="true"
+                             tableName="ca_dish"/>
+    </changeSet>
+    <changeSet author="fengchang" id="addNotNullConstraint-name-ca-dish">
+        <addNotNullConstraint
+                columnDataType="varchar(200)"
+                columnName="name"
+                tableName="ca_dish"/>
+    </changeSet>
+    <changeSet author="fengchang" id="createTable-ca-dish-producer">
+        <createTable tableName="ca_dish_producer">
+            <column name="id" type="bigint(20)" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="producer_no" type="varchar(50)">
+            </column>
+            <column name="description" type="text">
+            </column>
+            <column name="status" type="varchar(20)">
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="fengchang" id="addUniqueConstraint-ca-dish-producer">
+        <addUniqueConstraint columnNames="producer_no"
+                             constraintName="unique-no-in-cadish-producer"
+                             initiallyDeferred="true"
+                             tableName="ca_dish_producer"/>
+    </changeSet>
+    <changeSet author="fengchang" id="addNotNullConstraint-name-ca-dish-producer">
+        <addNotNullConstraint
+                columnDataType="varchar(50)"
+                columnName="producer_no"
+                tableName="ca_dish_producer"/>
+    </changeSet>
+    <changeSet author="fengchang" id="createTable-ca-order_item">
+        <createTable tableName="ca_order_item">
+            <column name="id" type="bigint(20)" autoIncrement="true" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="order_id" type="bigint(20)">
+                <constraints nullable="false" foreignKeyName="fk_order_item_2order_id" references="ca_order(id)"/>
+            </column>
+            <column name="table_id" type="bigint(20)">
+                <constraints nullable="false" foreignKeyName="fk_order_item_2table_id" references="ca_table(id)"/>
+            </column>
+            <column name="dish_id" type="bigint(20)">
+                <constraints nullable="false" foreignKeyName="fk_order_item_2dish_id" references="ca_dish(id)"/>
+            </column>
+            <column name="dish_count" type="INT UNSIGNED" defaultValue="1">
+            </column>
+            <column name="last_update_time" type="timestamp">
+            </column>
+            <column name="assign_to" type="bigint(20)">
+                <constraints nullable="true" foreignKeyName="fk_order_item_2dish_producer" references="ca_dish_producer(id)"/>
+            </column>
+            <column name="status" type="varchar(20)">
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

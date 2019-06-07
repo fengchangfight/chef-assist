@@ -1,0 +1,191 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="xiefengchang (generated)" id="1558849222860-1">
+        <createTable tableName="ca_dish">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column defaultValueNumeric="10" name="expected_cooking_time" type="INT UNSIGNED"/>
+            <column name="tags" type="VARCHAR(100)"/>
+            <column name="thumbnail" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-2">
+        <createTable tableName="ca_dish_producer">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="producer_no" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column name="status" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-3">
+        <createTable tableName="ca_dish_tag">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-4">
+        <createTable tableName="ca_order">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="order_no" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_status" type="VARCHAR(50)"/>
+            <column name="start_time" type="timestamp"/>
+            <column name="created_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_time" type="timestamp"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-5">
+        <createTable tableName="ca_order_item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="order_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="table_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dish_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="dish_count" type="INT UNSIGNED"/>
+            <column name="last_update_time" type="timestamp"/>
+            <column name="assign_to" type="BIGINT"/>
+            <column name="status" type="VARCHAR(20)"/>
+            <column name="description" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-6">
+        <createTable tableName="ca_role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="role_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-7">
+        <createTable tableName="ca_table">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="table_no" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-8">
+        <createTable tableName="ca_user">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="username" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="salt" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reg_time" type="timestamp"/>
+            <column name="role_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-9">
+        <addUniqueConstraint columnNames="name" constraintName="name" tableName="ca_dish_tag"/>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-10">
+        <addUniqueConstraint columnNames="role_name" constraintName="role_name" tableName="ca_role"/>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-11">
+        <addUniqueConstraint columnNames="name" constraintName="unique-name-in-cadish" tableName="ca_dish"/>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-12">
+        <addUniqueConstraint columnNames="producer_no" constraintName="unique-no-in-cadish-producer" tableName="ca_dish_producer"/>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-13">
+        <addUniqueConstraint columnNames="order_no" constraintName="unique-order-no-in-caorder" tableName="ca_order"/>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-14">
+        <addUniqueConstraint columnNames="table_no" constraintName="unique-table-no-in-catable" tableName="ca_table"/>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-15">
+        <addUniqueConstraint columnNames="username" constraintName="username" tableName="ca_user"/>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-16">
+        <createIndex indexName="fk_order_created_by2_user" tableName="ca_order">
+            <column name="created_by"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-17">
+        <createIndex indexName="fk_order_item_2dish_id" tableName="ca_order_item">
+            <column name="dish_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-18">
+        <createIndex indexName="fk_order_item_2dish_producer" tableName="ca_order_item">
+            <column name="assign_to"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-19">
+        <createIndex indexName="fk_order_item_2order_id" tableName="ca_order_item">
+            <column name="order_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-20">
+        <createIndex indexName="fk_order_item_2table_id" tableName="ca_order_item">
+            <column name="table_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-21">
+        <createIndex indexName="fk_user_ref_role" tableName="ca_user">
+            <column name="role_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-22">
+        <addForeignKeyConstraint baseColumnNames="created_by" baseTableName="ca_order" constraintName="fk_order_created_by2_user" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ca_user"/>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-23">
+        <addForeignKeyConstraint baseColumnNames="dish_id" baseTableName="ca_order_item" constraintName="fk_order_item_2dish_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ca_dish"/>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-24">
+        <addForeignKeyConstraint baseColumnNames="assign_to" baseTableName="ca_order_item" constraintName="fk_order_item_2dish_producer" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ca_dish_producer"/>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-25">
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="ca_order_item" constraintName="fk_order_item_2order_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ca_order"/>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-26">
+        <addForeignKeyConstraint baseColumnNames="table_id" baseTableName="ca_order_item" constraintName="fk_order_item_2table_id" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ca_table"/>
+    </changeSet>
+    <changeSet author="xiefengchang (generated)" id="1558849222860-27">
+        <addForeignKeyConstraint baseColumnNames="role_id" baseTableName="ca_user" constraintName="fk_user_ref_role" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ca_role"/>
+    </changeSet>
+    <changeSet author="fengchang" id="addColumn-ca-dish-price">
+        <addColumn tableName="ca_dish">
+            <column name="price" type="double"/>
+        </addColumn>
+    </changeSet>
+
+
+</databaseChangeLog>
