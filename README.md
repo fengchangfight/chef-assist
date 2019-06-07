@@ -24,3 +24,6 @@ VueJs框架之quasar
 
 ## 订单详情
 ![订单详情](./orderdetail.png)
+
+## 历史订单
+![历史订单](./historyorder.png)
