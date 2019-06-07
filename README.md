@@ -21,3 +21,6 @@ VueJs框架之quasar
 
 ## 用户管理
 ![用户管理](./user.png)
+
+## 订单详情
+![订单详情](./orderdetail.png)
