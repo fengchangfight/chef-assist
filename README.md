@@ -39,3 +39,43 @@ VueJs框架之quasar
 
 ## 历史订单
 ![历史订单](./historyorder.png)
+
+## 程序运行指南
+### 后台
+#### 数据库
+首先新建数据库chef_assist:
+```
+create database if not exists chef_assist  default charset utf8 collate utf8_general_ci;
+```
+#### 启动Springboot程序：
+使用intellij打开pom.xml, open as project
+
+修改数据库用户名和密码,在application-*.properties中的如下两行:
+
+```
+spring.datasource.username=root
+spring.datasource.password=Passw0rd
+```
+
+在ChefAssistApplication类上右键Debug或者Run启动程序
+
+程序使用了liquibase会自动在刚才创建的数据库中初始化表结构和一些必要数据，例如admin用户
+
+admin用户的默认密码也为admin，默认服务端口号为8686，如果需要可手动更改（但需要考虑前端做相应的适配）
+
+#### 启动前端程序
+前端用的是基于vuejs的quasar框架，在启动前需要安装nodejs(包括npm包管理器)，和quasar-cli(参考：http://www.quasarchs.com/quasar-cli/installation)
+
+在安装好上述依赖后，进入chefassist-web目录，先执行npm install,成功后再执行:
+
+```
+quasar dev
+```
+
+一切顺利后，则可在浏览器中浏览http://localhost:8685/， 即默认前端端口号为8685
+
+### 跨域问题
+后台是做了跨域限制访问的，只允许localhost:8685的请求，具体配置在application-*.properties中的
+```
+origin.base=http://localhost:8685
+```
